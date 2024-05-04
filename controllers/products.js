@@ -1,4 +1,4 @@
-//route handlers are actually the controllers
+//ROUTE HANDLERS ARE ACTUALLY THE CONTROLLERS
 
 const Product = require("../models/products");
 
@@ -6,8 +6,9 @@ async function handleNewProduct(req, res) {
   const body = req.body;
   console.log(body);
   const result = await Product.create({
-    task: body.task,
-    status: true,
+    product: body.product,
+    productDescription: body.productDescription,
+    price: Number(body.price),
   });
 
   return res.status(201).json({
@@ -39,7 +40,10 @@ async function handleUpdateProductById(req, res) {
     { $set: editedProduct }
   );
 
-  return res.status(200).json({ status: "success", result });
+  return res.status(200).json({
+    status: "success",
+    result,
+  });
 }
 
 async function handleDeleteById(req, res) {
